@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:PM2P2T1.Converter"
+             x:Class="PM2P2T1.View.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <converters:SVGtoImageSource x:Key="SvgToImageValid" />
+    </ContentPage.Resources>
+    
+    
+
+    <StackLayout BackgroundColor="Beige" Padding="10">
+
+        <Grid>
+            <Picker  BackgroundColor="PapayaWhip" x:Name="cmbRegion"
+                Title="Selecciona una opción"
+                FontSize="Medium"
+                TitleColor="Black"
+                SelectedIndexChanged="cmbRegion_SelectedIndexChanged"
+                Grid.Column="0"
+                HorizontalOptions="Fill">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>America</x:String>
+                        <x:String>Africa</x:String>
+                        <x:String>Asia</x:String>
+                        <x:String>Oceania</x:String>
+                        <x:String>Europe</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Grid>
+
+        <ListView x:Name="ListPaises" 
+                  ItemTapped="ListPaises_ItemTapped"
+                  Margin="20,0,20,0"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="{Binding flags.svg, Converter={StaticResource SvgToImageValid}}" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+
+                            <Label Text="{Binding NameCountry.common}"
+                                       VerticalOptions="Center" />
+
+                            <Label HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       Text="{Binding CodeCountry}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>
